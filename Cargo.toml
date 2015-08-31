@@ -1,0 +1,10 @@
+[package]
+name = "CloudTask"
+version = "0.1.0"
+authors = ["Harbon <harbon@lydiabox.com>"]
+
+[dependencies]
+iron = "*"
+urlencoded = "*"
+router = "*"
+rustc-serialize = "*"
