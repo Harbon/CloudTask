@@ -5,6 +5,13 @@ authors = ["Harbon <harbon@lydiabox.com>"]
 
 [dependencies]
 iron = "*"
-urlencoded = "*"
-router = "*"
 rustc-serialize = "*"
+[dependencies.urlencoded]
+
+git = "https://github.com/iron/urlencoded.git"
+[dependencies.logger]
+
+git = "https://github.com/iron/logger.git"
+[dependencies.router]
+
+git = "https://github.com/iron/router.git"
