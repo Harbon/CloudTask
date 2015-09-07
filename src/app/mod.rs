@@ -9,6 +9,6 @@ use iron::prelude::*;
 
 pub fn run () {
     println!("start run app");
-    Iron::new(routes::init_router()).http("localhost:4949").unwrap();
+    Iron::new(routes::init_router()).http("121.40.132.139:4949").unwrap();
     println!("stop run app");
 }
