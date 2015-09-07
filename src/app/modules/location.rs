@@ -11,8 +11,8 @@ pub struct LocationTask {
 impl ToJson for LocationTask {
     fn to_json (&self) -> Json {
         let mut map: BTreeMap<String, Json> = BTreeMap::new();
-        map.insert("latitude".to_string(), self.latitude.unwrap().to_json());
-        map.insert("longitude".to_string(), self.longitude.unwrap().to_json());
+        map.insert("latitude".to_string(), self.latitude.to_json());
+        map.insert("longitude".to_string(), self.longitude.to_json());
         map.to_json()
     }
  }
