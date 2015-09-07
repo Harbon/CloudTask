@@ -58,15 +58,29 @@ pub fn handle_refer_express(_req: &mut Request) ->IronResult<Response> {
         Err(_) => return Ok(Response::with((status::Ok, get_error
             (500, "INTERNAL ERROR".to_string()).to_string()))),
     };
-    let array_num: &Vec<String> = match query_map.get("num") {
+    let array_type: &Vec<String> = match query_map.get("type") {
         Some(array) => array,
         None => return Ok(Response::with((status::Ok, get_error
-            (103, "INTERNAL JSON".to_string()).to_string()))),
+            (103, "INVALID JSON".to_string()).to_string()))),
     };
-    let _num: &str = match array_num.get(0) {
-        Some(s) => s,
+    let _type: &str = match array_type.get(0) {
+        Some(t) => t,
         None => return Ok(Response::with((status::Ok, get_error
-            (103, "INTERNAL JSON".to_string()).to_string()))),
+            (500, "INVALID JSON".to_string()).to_string()))),
+    };
+    if !_type.eq("Text") {
+        return Ok(Response::with((status::Ok, get_error
+            (103, "INVALID JSON".to_string()).to_string())));
+    }
+    let array_data:&Vec<String> = match query_map.get("data") {
+        Some(array) => array,
+        None => return Ok(Response::with((status::Ok, get_error
+            (500, "INTERNAL ERROR".to_string()).to_string()))),
+    };
+    let _num: &str = match array_data.get(0) {
+        Some(num) => num,
+        None => return Ok(Response::with((status::Ok, get_error
+            (500, "INTERNAL ERROR".to_string()).to_string()))),
     };
     let _url = "http://m.kuaidi100.com/result.jsp?nu=".to_string() + _num;
     let mut web_page_task = WebpageTask::new();
