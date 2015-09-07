@@ -53,7 +53,7 @@ pub fn get_error(code: i32, message: String) -> Json {
     查快递任务处理
 */
 pub fn handle_refer_express(_req: &mut Request) ->IronResult<Response> {
-    let query_map: &HashMap<String, Vec<String>> = match _req.get_ref::<UrlEncodedQuery>() {
+    let query_map: &HashMap<String, Vec<String>> = match _req.get_ref::<UrlEncodedBody>() {
         Ok(map) => map,
         Err(_) => return Ok(Response::with((status::Ok, get_error
             (500, "INTERNAL ERROR".to_string()).to_string()))),
