@@ -7,9 +7,11 @@ authors = ["Harbon <harbon@lydiabox.com>"]
 iron = "*"
 rustc-serialize = "*"
 image = "*"
-[dependencies.urlencoded]
+persistent = "*"
+[dependencies.bodyparser]
 
-git = "https://github.com/iron/urlencoded.git"
+git = "https://github.com/iron/body-parser.git"
+
 [dependencies.logger]
 
 git = "https://github.com/iron/logger.git"
