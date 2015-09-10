@@ -178,18 +178,13 @@ pub fn handle_decode_qr(_req: &mut Request) -> IronResult<Response> {
         Err(_) => return Ok(Response::with((status::Ok, get_error
             (102, "Internal Server Error".to_string()).to_string()))),
     };
-    let result_full = match String::from_utf8(output.stdout) {
+    let mut result_full = match String::from_utf8(output.stdout) {
         Ok(s) => s,
         Err(_) => return Ok(Response::with((status::Ok, get_error
             (102, "Internal Server Error".to_string()).to_string()))),
     };
+    result_full = result_full.replace("\n", "");
     let mut text_task = TextTask::new();
-    // let is_qrcode_info = result_full.contains(':');
-    // if !is_qrcode_info {
-    //         return Ok(Response::with((status::Ok, get_error
-    //             (103, "Invalid Parameter".to_string()).to_string())));
-    // }
-    // let result_qr:Vec<&str> = result_full.split(|c|c == ':').collect();
     text_task.set_text(result_full.trim_left_matches("QR-Code:").to_string());
     let data_array = vec![text_task.to_json()];
     let refer_express_task = Task {
