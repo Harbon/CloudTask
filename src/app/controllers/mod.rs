@@ -185,7 +185,7 @@ pub fn handle_decode_qr(_req: &mut Request) -> IronResult<Response> {
     };
     result_full = result_full.replace("\n", "");
     let mut text_task = TextTask::new();
-    text_task.set_text(result_full.trim_left_matches("QR-Code:").to_string());
+    text_task.set_text(result_full);
     let data_array = vec![text_task.to_json()];
     let refer_express_task = Task {
         type_string: Some("Text".to_string()),
