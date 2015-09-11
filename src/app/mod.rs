@@ -13,6 +13,6 @@ pub fn run () {
     println!("start run app");
     let mut chain = Chain::new(routes::init_router());
     chain.link_before(Read::<bodyparser::MaxBodyLength>::one(MAX_BODY_LENGTH));
-    Iron::new(chain).http("121.40.132.139:4949").unwrap();
+    Iron::new(chain).http("localhost:4949").unwrap();
     println!("stop run app");
 }
