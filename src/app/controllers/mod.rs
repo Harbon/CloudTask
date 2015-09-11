@@ -184,6 +184,10 @@ pub fn handle_decode_qr(_req: &mut Request) -> IronResult<Response> {
             (102, "Internal Server Error".to_string()).to_string()))),
     };
     result_full = result_full.replace("\n", "");
+    if result_full.eq("NOTQRCODE") {
+        return Ok(Response::with((status::Ok, get_error
+            (103, "Invalid Parameter".to_string()).to_string())));
+    }
     let mut text_task = TextTask::new();
     text_task.set_text(result_full);
     let data_array = vec![text_task.to_json()];
