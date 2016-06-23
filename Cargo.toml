@@ -8,6 +8,8 @@ iron = "*"
 rustc-serialize = "*"
 image = "*"
 persistent = "*"
+serde = "*"
+serde_json = "*"
 [dependencies.bodyparser]
 
 git = "https://github.com/iron/body-parser.git"

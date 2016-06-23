@@ -11,6 +11,7 @@ use app::modules::webpage::WebpageTask;
 use app::modules::error::Error;
 use rustc_serialize::json;
 use rustc_serialize::json::{ToJson, Json};
+use serde_json::Value;
 use std::collections::BTreeMap;
 use std::process::Command;
 use rustc_serialize::base64::FromBase64;
@@ -62,7 +63,7 @@ pub fn get_error(code: i32, message: String) -> Json {
     查快递任务处理
 */
 pub fn handle_refer_express(_req: &mut Request) ->IronResult<Response> {
-    let data_array:Vec<Json> = match handle_request("Text", _req) {
+    let data_array:Vec<Value> = match handle_request("Text", _req) {
         Ok(json_array) =>json_array,
         Err(err) => {
             match err {
@@ -105,7 +106,7 @@ pub fn handle_refer_express(_req: &mut Request) ->IronResult<Response> {
 }
 
 pub fn handle_decode_qr(_req: &mut Request) -> IronResult<Response> {
-    let json_array: Vec<Json> = match handle_request("ImageData", _req) {
+    let json_array: Vec<Value> = match handle_request("ImageData", _req) {
         Ok(json_array) =>json_array,
         Err(err) => {
             match err {
@@ -198,9 +199,9 @@ pub fn handle_decode_qr(_req: &mut Request) -> IronResult<Response> {
     Ok(Response::with((status::Ok, refer_express_task.to_json().to_string())))
 }
 
-pub fn handle_request(data_type: &str, _req: &mut Request) -> Result<Vec<Json>, CloudTaskError> {
+pub fn handle_request(data_type: &str, _req: &mut Request) -> Result<Vec<Value>, CloudTaskError> {
     let body = _req.get::<bodyparser::Json>();
-    let json_body:Json;
+    let json_body;
     match body {
         Ok(Some(b)) => {json_body = b;},
         Ok(None) => {return Err(CloudTaskError::InvalidParameter);},
