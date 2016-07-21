@@ -4,12 +4,12 @@ version = "0.1.0"
 authors = ["Harbon <harbon@lydiabox.com>"]
 
 [dependencies]
-iron = "*"
-rustc-serialize = "*"
-image = "*"
-persistent = "*"
-serde = "*"
-serde_json = "*"
+iron = "0.3.0"
+rustc-serialize = "0.3.19"
+image = "0.10.1"
+persistent = "0.1.0"
+serde = "0.7.10"
+serde_json = "0.7.1"
 [dependencies.bodyparser]
 
 git = "https://github.com/iron/body-parser.git"
